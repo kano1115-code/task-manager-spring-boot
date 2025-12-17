@@ -1,13 +1,11 @@
-# ビルドステージ
+# ステージ1: Mavenでビルド
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
+COPY . .
 RUN mvn clean package -DskipTests
 
-# 実行ステージ（Alpine ベースの軽量イメージ）
-FROM eclipse-temurin:21-jdk-alpine
+# ステージ2: 実行用イメージ
+FROM openjdk:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
-

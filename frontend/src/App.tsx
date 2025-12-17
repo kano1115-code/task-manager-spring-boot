@@ -11,7 +11,7 @@ const AppContent = () => {
 
   return (
     <div className="app">
-      <h1>タスク管理アプリ</h1>
+      <h1>タスク管理アプリ kano</h1>
       {isAuthenticated ? (
         <>
           <button onClick={logout}>ログアウト</button>
